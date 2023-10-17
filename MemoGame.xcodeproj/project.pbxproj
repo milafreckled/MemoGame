@@ -14,6 +14,7 @@
 		3F7744882ADEB65A00E4CAA3 /* MemoGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7744872ADEB65A00E4CAA3 /* MemoGameTests.swift */; };
 		3F7744922ADEB65A00E4CAA3 /* MemoGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7744912ADEB65A00E4CAA3 /* MemoGameUITests.swift */; };
 		3F7744942ADEB65A00E4CAA3 /* MemoGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7744932ADEB65A00E4CAA3 /* MemoGameUITestsLaunchTests.swift */; };
+		3F7744A12ADEB71B00E4CAA3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7744A02ADEB71B00E4CAA3 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		3F77448D2ADEB65A00E4CAA3 /* MemoGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7744912ADEB65A00E4CAA3 /* MemoGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITests.swift; sourceTree = "<group>"; };
 		3F7744932ADEB65A00E4CAA3 /* MemoGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F7744A02ADEB71B00E4CAA3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3F7744782ADEB65900E4CAA3 /* ContentView.swift */,
 				3F77447A2ADEB65900E4CAA3 /* Assets.xcassets */,
 				3F77447C2ADEB65900E4CAA3 /* Preview Content */,
+				3F7744A02ADEB71B00E4CAA3 /* CardView.swift */,
 			);
 			path = MemoGame;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7744792ADEB65900E4CAA3 /* ContentView.swift in Sources */,
+				3F7744A12ADEB71B00E4CAA3 /* CardView.swift in Sources */,
 				3F7744772ADEB65900E4CAA3 /* MemoGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
