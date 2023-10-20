@@ -17,21 +17,20 @@ struct CardView: View {
     }
     var body: some View {
         Group {
-                RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 12)
+                .frame(width: 150, height: 150)
                 .stroke(Color.blue, style: StrokeStyle(lineWidth: 2))
-                    .frame(width: 200, height: 200)
-                    .foregroundColor(isFlipped ? .white : .blue)
-                    .overlay(
-                        
-                        isFlipped ? Text("😄") : nil, alignment: .center
-                    )
-                    .onTapGesture {
-                        withAnimation {
-                            isFlipped.toggle()
-//                            color = color == .blue ? .white : .blue;
-                        }
+                .foregroundColor(isFlipped ? Color.white : Color.blue)
+                .onTapGesture {
+                    withAnimation {
+                        isFlipped.toggle()
                     }
-//                    .opacity(isFlipped ? 0.1 : 1.0)
+                }
+                .overlay(
+                    Text(isFlipped ? cardContent :  "")
+                        .font(.largeTitle)
+                        .foregroundColor(isFlipped ? Color.blue : Color.white)
+                )
         }
     }
 }
