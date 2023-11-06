@@ -9,30 +9,28 @@ import Foundation
 import SwiftUI
 
 struct CardView: View {
-    @State private var isFlipped = false
-    @State private var color: Color = .blue
-    var cardContent: String;
-    init(content: String){
-        cardContent = content;
+    var card: MemoGame<String>.Card
+    
+    init(_ card: MemoGame<String>.Card){
+        self.card = card
     }
+ 
     var body: some View {
-        Group {
-            RoundedRectangle(cornerRadius: 12)
-                .frame(width: 150, height: 150)
-                .stroke(Color.blue, style: StrokeStyle(lineWidth: 2))
-                .foregroundColor(isFlipped ? Color.white : Color.blue)
-                .onTapGesture {
-                    withAnimation {
-                        isFlipped.toggle()
-                    }
+        ZStack {
+            let base =  RoundedRectangle(cornerRadius: 12)
+            Group{
+                base.fill(.white)
+                base.strokeBorder(lineWidth: 3)
+                Text(card.content)
+                    .font(.largeTitle)
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1, contentMode: .fit)
                 }
-                .overlay(
-                    Text(isFlipped ? cardContent :  "")
-                        .font(.largeTitle)
-                        .foregroundColor(isFlipped ? Color.blue : Color.white)
-                )
+            .opacity(card.isFaceUp ? 1 : 0)
+                base.fill().opacity(card.isFaceUp ? 0 : 1)
+            }
+        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
         }
-    }
 }
 
 struct CardView_Previews: PreviewProvider {
