@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MemoGameApp: App {
+    let game = MyMemoGame(theme: DefaultThemes.redTheme)
+//    game.choose(card: game.cards[0])
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: MyMemoGame(theme: DefaultThemes.redTheme))
         }
     }
 }

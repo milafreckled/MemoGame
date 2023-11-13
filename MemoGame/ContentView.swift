@@ -8,42 +8,92 @@
 import SwiftUI
 
 struct ContentView: View {
-   
-//    private(set) var cards : Array<CardView>
-    //    for _ in 0..<cardsArray.count/2{
-    
-//}
-    @ObservedObject var viewModel: MyMemoGame = MyMemoGame();
-    private var cardsNumber = 10;
-//    var content: (Identifiable) -> View
-    var body: some View {
-        VStack {
-            ScrollView{
-                cards
-            }
-            Button("WYMIESZAJ"){
-                viewModel.shuffle()
-            }
-
+    @ObservedObject var viewModel: MyMemoGame
+    @State private var currentTheme: Theme = DefaultThemes.redTheme
+    var changeTheme : some View{
+        HStack{
+            ThemeButton(theme: DefaultThemes.redTheme, action: { currentTheme = DefaultThemes.redTheme})
+            ThemeButton(theme: DefaultThemes.greenTheme, action: { currentTheme = DefaultThemes.greenTheme})
+            ThemeButton(theme: DefaultThemes.blueTheme, action: { currentTheme = DefaultThemes.blueTheme})
         }
-        .padding()
     }
-    @ViewBuilder
-    mutating func adjustCardNumber(by offset: Int, symbol: String) -> some View{
-        Button(action: {cardsNumber = cardsNumber + offset}, label: {Image(systemName: symbol)}).font(.largeTitle)
+//    var ThemeButton: ((String, Color, [String], @escaping () -> Void) -> Button<VStack<TupleView<(some View, Text)>>>) =  {name, color, emojis, action in
+//        Button(action: action){
+//                    VStack {
+//                        Image(systemName: "pencil")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 30, height: 30)
+//                            
+//                        Text(name)
+//                            .font(.caption)
+//                            .foregroundColor(color)
+//                    }
+//                }
+//        
+//    }
+    var body: some View {
+
+//                        .navigationBarItems()
+        VStack {
+            Text("Memo")
+                .navigationBarTitleDisplayMode(.inline)
+                .font(.largeTitle)
+                .padding()
+            ScrollView{
+                LazyVGrid(columns: [GridItem(.fixed(120)), GridItem(.fixed(120))], spacing: 200){
+                    ForEach(viewModel.cards){card in
+                        CardView(card: card, theme: currentTheme).onTapGesture{
+                            withAnimation(.easeInOut(duration: 0.5)){
+                                viewModel.choose(card: card)
+                            }
+                        }
+                        //                        viewModel.cards.firstIndex(of: card) % 2 == 1 &&
+                        //                            Spacer()
+                        
+                    }
+                }.padding()
+            }
+        }
+        Spacer()
+        changeTheme
     }
-    var cards: some View {
+//    @ViewBuilder
+//    mutating func adjustCardNumber(by offset: Int, symbol: String) -> some View{
+//        Button(action: {cardsNumber = cardsNumber + offset}, label: {Image(systemName: symbol)}).font(.largeTitle)
+//    }
+   
+}
+
+struct CardView: View{
+    var card: MemoGame<String>.Card
+    var body: some View{
         GeometryReader{ geometry in
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 95), spacing: 0)], spacing: 0){
-                ForEach(viewModel.cards){
-                    card in CardView(card).aspectRatio(2/3, contentMode: .fit)
-                        .padding(4)
-                        .onTapGesture(viewModel.choose(card))
-                }
+            body(for: geometry.size)}
     }
-                                }.foregroundColor(viewModel.themeColor)
-                                }
+    var theme: Theme
+    @ViewBuilder
+    private func body(for size: CGSize) -> some View {
+        ZStack {
+            let base =  RoundedRectangle(cornerRadius: 12)
+            Group{
+                base.fill(theme.color)
+                base.strokeBorder(lineWidth: 3)
+                base.frame(minHeight: 200)
+                Text(card.content)
+                    .font(.largeTitle)
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1, contentMode: .fit)
+            }
+            .opacity(card.isFaceUp ? 1 : 0)
+            base.fill(theme.color).opacity(card.isFaceUp ? 0 : 1)
+            }
+        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+        }
+}
 
 #Preview {
-    ContentView()
+    let game = MyMemoGame(theme: DefaultThemes.redTheme)
+    game.choose(card: game.cards[0])
+    return ContentView(viewModel: game)
 }

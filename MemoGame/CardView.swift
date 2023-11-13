@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CardView: View {
+struct CardView_old: View {
     var card: MemoGame<String>.Card
     
     init(_ card: MemoGame<String>.Card){
@@ -33,9 +33,9 @@ struct CardView: View {
         }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(content: "😄")
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardView_old(content: "😄")
+//    }
+//}
 

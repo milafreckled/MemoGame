@@ -7,27 +7,32 @@
 
 import Foundation
 
-class MyMemoGame{
-    private static let emojis = ["😈", "👻", "😀", "🐸", "🐹", "😛"];
-    private static func createMemoGame() -> MemoGame<String>{
+class MyMemoGame: ObservableObject{
+    @Published private var model: MemoGame<String>
+    var theme: Theme;
+    init(theme: Theme){
+        self.theme = theme
+        model = MyMemoGame.createMemoGame(theme: theme)
+    }
+    private static func createMemoGame(theme: Theme) -> MemoGame<String>{
         return MemoGame<String>(
-            numberPairsOfCard: 12){
-                index in
-                if emojis.indices.contains(index){
-                    return emojis[index]
-                }else{
-                    return "?!"
-                }
+            numberPairsOfCard: theme.emojis.count){  pairIndex in
+                    return theme.emojis[pairIndex]
             }
     }
-    private var model = createMemoGame()
+    func changeTheme(theme: Theme){
+        model = MyMemoGame.createMemoGame(theme: theme)
+    }
     var cards: Array<MemoGame<String>.Card>{
-        return model.cards
+        model.cards
     }
-    func shuffle(){
-        model.shuffle();
-    }
+//    func shuffle(){
+//        model.shuffle();
+//    }
     func choose(card: MemoGame<String>.Card){
         model.choose(card: card)
+    }
+    func resetGame(){
+        model = MyMemoGame.createMemoGame(theme: theme)
     }
 }
