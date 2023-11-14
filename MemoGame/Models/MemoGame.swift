@@ -14,8 +14,8 @@ struct MemoGame<CardContent>  where CardContent: Equatable{
         cards = Array<Card>()
         for pairIndex in 0..<max(2, numberPairsOfCard){
             let content: CardContent = cardContentFactory(pairIndex)
-            cards.append(Card(content: content, id: pairIndex*2))
-            cards.append(Card(content: content, id: pairIndex*2 + 1))
+            cards.append(Card(content: content, id: String(pairIndex*2)))
+            cards.append(Card(content: content, id: String(pairIndex*2 + 1)))
         }
         cards.shuffle()
     }
@@ -33,6 +33,10 @@ struct MemoGame<CardContent>  where CardContent: Equatable{
         return lhs.cards == rhs.cards
     }
     
+    mutating func shuffle(){
+        cards.shuffle()
+    }
+    
     mutating func choose(card: Card){
         if let chosenIndex = cards.firstIndex(where: { card == $0 }), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched{
             if let potentialMatchedIndex = indexOfTheFlippedCard{
@@ -48,10 +52,11 @@ struct MemoGame<CardContent>  where CardContent: Equatable{
             }
         }
     }
+    
     struct Card: Identifiable, Equatable{
         var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent
-        var id: Int
+        var id: String
     }
 }

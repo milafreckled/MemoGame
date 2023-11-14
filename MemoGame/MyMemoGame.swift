@@ -26,9 +26,18 @@ class MyMemoGame: ObservableObject{
     var cards: Array<MemoGame<String>.Card>{
         model.cards
     }
-//    func shuffle(){
-//        model.shuffle();
-//    }
+    func shuffle(){
+        model.shuffle();
+//        typealias Card = MemoGame<String>.Card
+//        var shuffledCards: Array<Card>
+//
+//        let shuffledIndices = Array(0..<theme.emojis.count*2).shuffled()
+//        for index in shuffledIndices.prefix(8) {
+//            shuffledCards.append(Card(content: theme.emojis[index], id: String(index)))
+//        }
+//
+//        model.cards = shuffledCards.shuffled().map { CardView($0) }
+    }
     func choose(card: MemoGame<String>.Card){
         model.choose(card: card)
     }

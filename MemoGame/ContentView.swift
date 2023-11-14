@@ -12,9 +12,9 @@ struct ContentView: View {
     @State private var currentTheme: Theme = DefaultThemes.redTheme
     var changeTheme : some View{
         HStack{
-            ThemeButton(theme: DefaultThemes.redTheme, action: { currentTheme = DefaultThemes.redTheme})
-            ThemeButton(theme: DefaultThemes.greenTheme, action: { currentTheme = DefaultThemes.greenTheme})
-            ThemeButton(theme: DefaultThemes.blueTheme, action: { currentTheme = DefaultThemes.blueTheme})
+            ThemeButton(theme: DefaultThemes.redTheme, action: { currentTheme = DefaultThemes.redTheme}, imageName: "heart")
+            ThemeButton(theme: DefaultThemes.greenTheme, action: { currentTheme = DefaultThemes.greenTheme}, imageName: "star")
+            ThemeButton(theme: DefaultThemes.blueTheme, action: { currentTheme = DefaultThemes.blueTheme}, imageName: "car")
         }
     }
 //    var ThemeButton: ((String, Color, [String], @escaping () -> Void) -> Button<VStack<TupleView<(some View, Text)>>>) =  {name, color, emojis, action in
