@@ -8,26 +8,27 @@
 import Foundation
 import SwiftUI
 
-struct CardView_old: View {
+struct CardView: View{
     var card: MemoGame<String>.Card
-    
-    init(_ card: MemoGame<String>.Card){
-        self.card = card
-    }
- 
+//        var body: some View{
+//            GeometryReader{ geometry in
+//                body(for: geometry.size)}
+//        }
+//        @ViewBuilder
     var body: some View {
         ZStack {
             let base =  RoundedRectangle(cornerRadius: 12)
             Group{
-                base.fill(.white)
-                base.strokeBorder(lineWidth: 3)
+                base.fill(card.color)
+                base.strokeBorder(card.color, lineWidth: 3)
+                base.frame(minHeight: 160)
                 Text(card.content)
                     .font(.largeTitle)
                     .minimumScaleFactor(0.01)
                     .aspectRatio(1, contentMode: .fit)
-                }
+            }
             .opacity(card.isFaceUp ? 1 : 0)
-                base.fill().opacity(card.isFaceUp ? 0 : 1)
+            base.fill(card.color).opacity(card.isFaceUp ? 0 : 1)
             }
         .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
         }

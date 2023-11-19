@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct MemoGame<CardContent>  where CardContent: Equatable{
     private(set) var cards: Array<Card>
     
-    init(numberPairsOfCard: Int, cardContentFactory: (Int) -> CardContent){
+    init(numberPairsOfCard: Int, color: Color, cardContentFactory: (Int) -> CardContent){
         cards = Array<Card>()
         for pairIndex in 0..<max(2, numberPairsOfCard){
             let content: CardContent = cardContentFactory(pairIndex)
-            cards.append(Card(content: content, id: String(pairIndex*2)))
-            cards.append(Card(content: content, id: String(pairIndex*2 + 1)))
+            cards.append(Card(content: content, id: String(pairIndex*2), color: color))
+            cards.append(Card(content: content, id: String(pairIndex*2 + 1), color: color))
         }
         cards.shuffle()
     }
@@ -58,5 +59,6 @@ struct MemoGame<CardContent>  where CardContent: Equatable{
         var isMatched: Bool = false
         var content: CardContent
         var id: String
+        var color: Color
     }
 }

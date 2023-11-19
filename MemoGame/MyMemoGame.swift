@@ -16,8 +16,12 @@ class MyMemoGame: ObservableObject{
     }
     private static func createMemoGame(theme: Theme) -> MemoGame<String>{
         return MemoGame<String>(
-            numberPairsOfCard: theme.emojis.count){  pairIndex in
+            numberPairsOfCard: theme.emojis.count, color: theme.color){  pairIndex in
+                if (theme.emojis.indices.contains(pairIndex)){
                     return theme.emojis[pairIndex]
+                }else{
+                    return "?!"
+                }
             }
     }
     func changeTheme(theme: Theme){
