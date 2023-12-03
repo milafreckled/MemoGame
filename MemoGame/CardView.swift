@@ -26,6 +26,8 @@ struct CardView: View{
                     .font(.largeTitle)
                     .minimumScaleFactor(0.01)
                     .aspectRatio(1, contentMode: .fit)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
+                    .animation(card.isMatched ? .linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .opacity(card.isFaceUp ? 1 : 0)
             base.fill(card.color).opacity(card.isFaceUp ? 0 : 1)
