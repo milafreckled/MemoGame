@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Cardify: AnimatableModifier { // == (ViewModifier, Animatable)
+struct Cardify: ViewModifier { // == (ViewModifier, Animatable)
 //    var rotation: Double
     var color: Color
     var isFaceUp: Bool
