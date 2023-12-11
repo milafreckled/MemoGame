@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Circlepart: Shape {
+struct CirclePart: Shape {
     var startAngle: Angle
     var endAngle: Angle
     var clockwise: Bool = false

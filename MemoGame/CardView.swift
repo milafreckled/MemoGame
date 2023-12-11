@@ -14,26 +14,22 @@ struct CardView: View{
 //            GeometryReader{ geometry in
 //                body(for: geometry.size)}
 //        }
-//        @ViewBuilder
+//    @ViewBuilder
     var body: some View {
         ZStack {
-            let base =  RoundedRectangle(cornerRadius: 12)
             Group{
-                base.fill(card.color)
-                base.strokeBorder(card.color, lineWidth: 3)
-                base.frame(minHeight: 160)
-                Text(card.content)
-                    .font(.largeTitle)
-                    .minimumScaleFactor(0.01)
-                    .aspectRatio(1, contentMode: .fit)
-                    .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
-                    .animation(card.isMatched ? .linear(duration: 1).repeatForever(autoreverses: false) : .default)
+                CirclePart(startAngle: Angle(degrees: 90), endAngle: Angle(degrees:240)).overlay(
+                    Text(card.content)
+                        .font(.system(size: 200))
+                        .minimumScaleFactor(0.01)
+                        .rotationEffect(Angle.degrees(card.isMatched ? 360:0))
+                        .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
+                )
+                .modifier(Cardify(isFaceUp: card.isFaceUp, color: card.color))
             }
-            .opacity(card.isFaceUp ? 1 : 0)
-            base.fill(card.color).opacity(card.isFaceUp ? 0 : 1)
-            }
-        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+            .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
         }
+    }
 }
 
 //struct CardView_Previews: PreviewProvider {
